@@ -38,17 +38,14 @@ const SearchBar = ({ setSearchQuery, setFilter, setSortOrder, setResults }) => {
 
     return (
         <>
-            <div className="relative flex justify-center items-center h-8 mt-7 text-base gap-0.5">
-                <div
-                    className="flex items-center bg-[#FFFFFF] rounded-l-lg drop-shadow-md w-3/6 pl-2 
-                focus-within:outline-none focus-within:ring-1 focus-within:ring-blue-500"
-                >
+            <div className="relative flex justify-center items-center h-8 mt-7 text-base">
+                <div className="flex items-center bg-[#FFFFFF] rounded-l-lg w-3/6 pl-2 focus-within:outline-none focus-within:ring-1 focus-within:ring-blue-500 border border-gray-200">
                     <FontAwesomeIcon
                         icon={faSearch}
                         className="w-5 h-5 text-[#8192a1] ml-2"
                     />
                     <input
-                        className="input bg-transparent w-full text-[#4d6c88] focus:outline-none focus:ring-0 focus:border-none"
+                        className="input bg-transparent w-full text-[#4d6c88] focus:outline-none focus:ring-0 border-none"
                         name="query"
                         type="text"
                         placeholder="Search"
@@ -59,28 +56,39 @@ const SearchBar = ({ setSearchQuery, setFilter, setSortOrder, setResults }) => {
                     <div
                         tabIndex={0}
                         role="button"
-                        className="text-primary px-7 py-3 bg-white
-                    rounded-r-md border-y border-r 
-                    border-r-white/10 border-y-white/10 
-                    drop-shadow-md
+                        className="text-primary px-7 py-2 bg-white
+                    rounded-r-md border border-l-0
+                    border-gray-200
                     hover:bg-[#dddddd] cursor-pointer"
                     >
-                        {selectedFilter}
+                        <span className="text-sm">{selectedFilter}</span>
                     </div>
                     <ul
                         tabIndex={0}
                         className="dropdown-content mt-2 menu bg-white text-primary rounded-box z-[1] w-32 shadow"
                     >
-                        <li onClick={() => handleFilterClick("Users")} className="w-full">
+                        <li
+                            onClick={() => handleFilterClick("Users")}
+                            className="w-full"
+                        >
                             <a>Users</a>
                         </li>
-                        <li onClick={() => handleFilterClick("Experiences")} className="w-full">
+                        <li
+                            onClick={() => handleFilterClick("Experiences")}
+                            className="w-full"
+                        >
                             <a>Experiences</a>
                         </li>
-                        <li onClick={() => handleFilterClick("Opportunities")} className="w-full">
+                        <li
+                            onClick={() => handleFilterClick("Opportunities")}
+                            className="w-full"
+                        >
                             <a>Jobs</a>
                         </li>
-                        <li onClick={() => handleFilterClick("Events")} className="w-full">
+                        <li
+                            onClick={() => handleFilterClick("Events")}
+                            className="w-full"
+                        >
                             <a>Events</a>
                         </li>
                     </ul>
@@ -104,7 +112,10 @@ const SearchBar = ({ setSearchQuery, setFilter, setSortOrder, setResults }) => {
                         className="dropdown-content mt-2 menu bg-white text-primary rounded-box z-[1] w-40 p-2 shadow"
                     >
                         <li className="text-center font-semibold mb-2 text-gray-400">
-                            Sort by {selectedFilter === 'Users' ? 'username' : 'publish date'}
+                            Sort by{" "}
+                            {selectedFilter === "Users"
+                                ? "username"
+                                : "publish date"}
                         </li>
                         <li onClick={() => handleSortClick("asc")}>
                             <a>Ascending</a>
