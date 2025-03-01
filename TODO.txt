@@ -1,0 +1,12 @@
+Change school and course fields in signup to dropdown
+- Dropdown items should be fetched from backend
+Create a change password functionality in profile
+Implement Chat functionality
+- Create chat tables
+- Create websocket backend for chat
+- Create frontend
+Implement Archival
+- Create archived experience table
+Implement Emailing Service
+- For notification of pledge
+- For forgot password
