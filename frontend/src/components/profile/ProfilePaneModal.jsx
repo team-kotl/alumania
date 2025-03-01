@@ -18,6 +18,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
         dpRaw: null,
         location: "",
         private: 0,
+        batch: "",
     });
 
     const [error, setError] = useState(false);
@@ -41,6 +42,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                             dpRaw: res.data.displaypic,
                             location: res.data.location,
                             private: res.data.private,
+                            batch: res.data.batch,
                         };
                     });
                 });
@@ -222,7 +224,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                                     {profile.fullName}
                                 </span>
                                 <span className="text-base mb-1">
-                                    {profile.course}
+                                    {`${profile.course} ${profile.batch}`}
                                 </span>
                                 <span className="text-sm text-gray-400 self-flex-end">
                                     {profile.company

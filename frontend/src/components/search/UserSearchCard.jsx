@@ -64,7 +64,7 @@ const UserSearchCard = ({ user }) => {
                             </p>
                         </div>
                         <div className="flex items-center space-x-2 mt-1">
-                            <p className="text-sm text-primary">{user.course}</p>
+                            <p className="text-sm text-primary">{`${user.course} ${user.batch}`}</p>
                         </div>
                     </div>
                 </div>

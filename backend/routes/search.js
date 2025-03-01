@@ -66,7 +66,7 @@ router.get("/opportunities/:query", (req, res) => {
 router.get("/users/:query", (req, res) => {
     const { query } = req.params;
     db.query(
-        "SELECT userid, username, firstname, middlename, lastname, course, company, displaypic, location FROM user RIGHT JOIN alumni using(userid) WHERE CONCAT(username, firstname, COALESCE(middlename, ''), lastname, course, COALESCE(company, '')) LIKE ? AND usertype = 'Alumni' ORDER BY username ASC",
+        "SELECT userid, username, firstname, middlename, lastname, course, company, displaypic, location, batch FROM user RIGHT JOIN alumni using(userid) WHERE CONCAT(username, firstname, COALESCE(middlename, ''), lastname, course, COALESCE(company, ''), batch, school) LIKE ? AND usertype = 'Alumni' ORDER BY username ASC",
         [`%${query}%`],
         (err, results) => {
             if (err) {
