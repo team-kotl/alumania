@@ -108,7 +108,7 @@ const EventSearchCard = (props) => {
 
     return (
         <>
-            <div className="flex items-center h-fit card lg:card-side bg-white border join-item">
+            <div className="flex items-center h-fit card lg:card-side bg-white first:rounded-t-2xl last:rounded-b-2xl border-x border-t last:border-b border-gray-200 join-item">
                 <figure className="min-w-[33%] max-w-[33%]">
                     <img
                         src={image}
@@ -185,7 +185,7 @@ const EventSearchCard = (props) => {
                     </div>
                     <div className="card-actions justify-end">
                         <button className="btn btn-sm btn-outline btn-secondary w-[6rem] rounded-full">
-                            Sponsor
+                            Pledge
                         </button>
                         <button
                             className={`flex overflow-hidden h-[2rem]

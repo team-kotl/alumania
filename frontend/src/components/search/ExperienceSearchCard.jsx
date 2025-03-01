@@ -147,7 +147,7 @@ const ExperienceSearchCard = ({ experience }) => {
 
     return (
         <>
-            <div className="justify-self-center join-item w-full bg-white border p-4 space-y-2">
+            <div className="justify-self-center join-item w-full bg-white border-gray-200 border-x border-t last:border-b first:rounded-t-2xl last:rounded-b-2xl p-4 space-y-2">
                 <div className="flex mt-4 ml-4 mr-4 items-start space-x-5">
                     {avatar}
                     <div className="flex flex-col w-full">

@@ -5,8 +5,8 @@ import ErrorHero from "../ErrorHero";
 import ProfileExperienceCard from "./ProfileExperienceCard";
 /**
  * Profile Pane Modal that displays user profile information and experiences
- * when clicked. Fetches profile data and experiences from the backend and handles 
- * display for public/private profiles. Displays loading spinner while data is 
+ * when clicked. Fetches profile data and experiences from the backend and handles
+ * display for public/private profiles. Displays loading spinner while data is
  * being fetched and error state if there's an issue with the request.
  */
 const ProfilePaneModal = ({ userid, onClose }) => {
@@ -157,7 +157,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
         return (
             <>
                 <dialog id={`modal-${userid}`} className="modal" open>
-                    <div className="modal-box p-0 w-11/12 max-w-3xl">
+                    <div className="modal-box p-0 w-11/12 max-w-3xl border border-gray-200">
                         <form method="dialog">
                             <button
                                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -167,21 +167,17 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                             </button>
                         </form>
                         <section className="join join-vertical w-full">
-                            <div className="flex join-item flex-row w-full border p-10 bg-white">
+                            <div className="flex join-item flex-row w-full border-b border-gray-200 p-10 bg-white">
                                 <div className="flex flex-col w-[80%] pl-6 pt-6">
                                     <span className="text-2xl font-bold">
                                         {profile.fullName}
                                     </span>
                                     <span className="text-base mb-1">
-                                        {profile.username}
+                                        {profile.course}
                                     </span>
                                     <span className="text-sm text-gray-400 self-flex-end">
-                                        {profile.course}
                                         {profile.company
-                                            ? ` | ${profile.company}`
-                                            : ``}
-                                        {profile.location
-                                            ? ` | ${profile.location}`
+                                            ? `${profile.company}`
                                             : ``}
                                     </span>
                                 </div>
@@ -189,7 +185,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                                     {avatar}
                                 </div>
                             </div>
-                            <div className="join-item flex bg-white border p-4">
+                            <div className="join-item flex bg-white p-4">
                                 <span className="text-xl text-gray-400 text-center w-full">
                                     This account is private
                                 </span>
@@ -210,7 +206,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
     return (
         <>
             <dialog id={`modal-${userid}`} className="modal" open>
-                <div className="modal-box p-0 w-11/12 max-w-3xl">
+                <div className="modal-box p-0 max-h-[80vh] rounded-2xl border border-gray-200 w-11/12 max-w-3xl">
                     <form method="dialog">
                         <button
                             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -220,21 +216,17 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                         </button>
                     </form>
                     <section className="join join-vertical w-full">
-                        <div className="flex join-item flex-row w-full border p-10 bg-white">
+                        <div className="flex join-item flex-row w-full border-b border-gray-200 p-10 bg-white">
                             <div className="flex flex-col w-[80%] pl-6 pt-6">
                                 <span className="text-2xl font-bold">
                                     {profile.fullName}
                                 </span>
                                 <span className="text-base mb-1">
-                                    {profile.username}
+                                    {profile.course}
                                 </span>
                                 <span className="text-sm text-gray-400 self-flex-end">
-                                    {profile.course}
                                     {profile.company
-                                        ? ` | ${profile.company}`
-                                        : ``}
-                                    {profile.location
-                                        ? ` | ${profile.location}`
+                                        ? `${profile.company}`
                                         : ``}
                                 </span>
                             </div>
@@ -242,7 +234,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                                 {avatar}
                             </div>
                         </div>
-                        <div className="join-item flex border p-1 align-middle bg-white">
+                        <div className="join-item flex p-1 align-middle bg-white">
                             <span className="w-full text-center text-gray-400">
                                 Experiences
                             </span>
@@ -259,7 +251,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                                 />
                             ))
                         ) : (
-                            <div className="join-item flex bg-white border p-4">
+                            <div className="join-item flex bg-white border-t border-gray-200 p-4">
                                 <span className="text-xl text-gray-400 text-center w-full">
                                     No experiences shared yet
                                 </span>

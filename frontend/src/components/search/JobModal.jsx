@@ -79,7 +79,7 @@ const JobModal = ({ job, calculateTimeAgo, onClose }) => {
                                 ✕
                             </button>
                         </form>
-                        <div className="card bg-white border h-[calc(100vh-7rem)] overflow-y-auto p-4">
+                        <div className="card bg-white border border-gray-200 h-[calc(100vh-7rem)] overflow-y-auto p-4">
                             <div className="card-body">
                                 <h1 className="card-title leading-5 text text-primary font-bold text-3xl">
                                     {job.title}

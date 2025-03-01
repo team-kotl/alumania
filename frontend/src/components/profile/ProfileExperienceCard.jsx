@@ -151,10 +151,10 @@ const ProfileExperienceCard = ({ experience }) => {
     return (
         <>
             <DeletePostModal xpid={experience.xpid} />
-            <div className="relative first-line:justify-self-center join-item w-full bg-white border p-4 space-y-2">
+            <div className="relative first-line:justify-self-center join-item w-full bg-white border-t border-gray-200 p-4 space-y-2">
                 {experience.userid === userid ? (
                     <div
-                        className="absolute flex top-3 right-5 w-7 h-7 select-none cursor-pointer transition-all hover:bg-gray-200 rounded-full justify-center align-middle"
+                        className="absolute flex top-3 right-5 w-7 h-7 select-none cursor-pointer transition-all hover:bg-gray-200 justify-center align-middle"
                         onClick={() =>
                             document
                                 .getElementById(

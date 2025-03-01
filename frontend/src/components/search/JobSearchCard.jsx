@@ -57,7 +57,7 @@ const JobSearchCard = ({ job }) => {
                 />
             )}
             <div
-                className="join-item justify-self-center bg-white p-10 rounded-xl border cursor-pointer"
+                className="join-item justify-self-center bg-white p-10 first:rounded-t-2xl last:rounded-b-2xl border-x border-t last:border-b border-gray-200 cursor-pointer"
                 onClick={handleJobClick}
             >
                 <div className="flex items-center gap-5">

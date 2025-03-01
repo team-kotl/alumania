@@ -141,7 +141,7 @@ const SearchPage = () => {
             ) : results.length === 0 ? (
                 <NoResultsHero />
             ) : (
-                <section className="join join-vertical px-[20%] my-10 rounded-box w-full">
+                <section className="join join-vertical h-[calc(100vh-7rem)] px-[20%] mt-10 w-full overflow-y-auto">
                     {filter === "users"
                         ? sortResults(results).map((user, index) => (
                               <UserSearchCard key={index} user={user} />

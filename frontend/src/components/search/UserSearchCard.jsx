@@ -52,7 +52,7 @@ const UserSearchCard = ({ user }) => {
                 <ProfilePaneModal userid={user.userid} onClose={closeModal} />
             )}
             <div
-                className="join-item justify-self-center p-4 w-full bg-white rounded-xl space-y-7 border transition-all hover:opacity-80 hover:cursor-pointer"
+                className="join-item justify-self-center p-4 w-full bg-white first:rounded-t-xl last:rounded-b-xl space-y-7 border-x border-t last:border-b border-gray-200 transition-all hover:opacity-80 hover:cursor-pointer"
                 onClick={handleProfileClick}
             >
                 <div className="flex ml-5 items-start space-x-5">
@@ -60,11 +60,11 @@ const UserSearchCard = ({ user }) => {
                     <div className="flex flex-col">
                         <div className="flex items-center space-x-2">
                             <p className="font-medium font-semibold">
-                                {user.username}
+                                {fullName}
                             </p>
                         </div>
                         <div className="flex items-center space-x-2 mt-1">
-                            <p className="text-sm text-primary">{fullName}</p>
+                            <p className="text-sm text-primary">{user.course}</p>
                         </div>
                     </div>
                 </div>
