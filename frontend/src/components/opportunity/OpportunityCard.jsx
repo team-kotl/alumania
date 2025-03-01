@@ -15,7 +15,7 @@ const OpportunityCard = ({
     return (
         <div
             id={job.jobpid}
-            className={`card-body cursor-pointer join-item max-h-52 border-t border-l border-r last:border-b border-gray-200 hover:bg-slate-100 ${
+            className={`card-body cursor-pointer join-item max-h-52 border-t first:border-t-0 border-gray-200 hover:bg-slate-100 ${
                 isSelected ? "bg-slate-100" : "bg-white"
             }`}
             onClick={() => handleCardClick(job)}

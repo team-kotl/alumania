@@ -99,8 +99,12 @@ const JobsPage = () => {
         return (
             <>
                 <div className="w-1/2 min-w-96 m-auto mt-[30vh] opacity-50 select-none">
-                    <h1 className="ml-[20%] text-5xl font-thin">There&apos;s nothing here yet.</h1>
-                    <p className="ml-[21%] text-2xl font-extralight">You&apos;ll see job listings here :)</p>
+                    <h1 className="ml-[20%] text-5xl font-thin">
+                        There&apos;s nothing here yet.
+                    </h1>
+                    <p className="ml-[21%] text-2xl font-extralight">
+                        You&apos;ll see job listings here :)
+                    </p>
                 </div>
             </>
         );
@@ -109,7 +113,7 @@ const JobsPage = () => {
     return (
         <>
             <main className="flex h-[calc(100vh-7rem)]">
-                <section className="join join-vertical w-[40%] rounded-box overflow-y-auto ml-16 border">
+                <section className="join join-vertical w-[40%] rounded-2xl overflow-y-auto ml-16 border border-gray-200">
                     {jobs.map((job) => (
                         <OpportunityCard
                             key={job.jobpid}
@@ -122,7 +126,7 @@ const JobsPage = () => {
                 </section>
                 {!selectedJob ? (
                     <div className="relative h-full overflow-hidden">
-                        <div className="card bg-white border w-[50%] h-[calc(100vh-7rem)] fixed top-24 right-10 overflow-y-auto p-4">
+                        <div className="card bg-white border border-gray-200 w-[50%] h-[calc(100vh-7rem)] fixed top-24 right-10 overflow-y-auto p-4">
                             <div className="card-body">
                                 <FontAwesomeIcon
                                     icon={faPersonThroughWindow}

@@ -84,8 +84,12 @@ const EventsPage = () => {
         return (
             <>
                 <div className="w-1/2 min-w-96 m-auto mt-[30vh] opacity-50 select-none">
-                    <h1 className="ml-[20%] text-5xl font-thin">There&apos;s nothing here yet.</h1>
-                    <p className="ml-[21%] text-2xl font-extralight">You&apos;ll see posted events here :)</p>
+                    <h1 className="ml-[20%] text-5xl font-thin">
+                        There&apos;s nothing here yet.
+                    </h1>
+                    <p className="ml-[21%] text-2xl font-extralight">
+                        You&apos;ll see posted events here :)
+                    </p>
                 </div>
             </>
         );
@@ -93,22 +97,26 @@ const EventsPage = () => {
 
     return (
         <>
-            <section className="join join-vertical px-[25%] mb-10 rounded-box">
-                {events.map((event) => {
-                    const isInterested = interested.some(
-                        (interest) =>
-                            interest.eventid === event.eventid &&
-                            interest.userid === userId
-                    );
-                    return (
-                        <EventCard
-                            key={event.eventid}
-                            event={event}
-                            interested={isInterested}
-                        />
-                    );
-                })}
-            </section>
+            <main className="flex w-full justify-center mb-5">
+                <div className="w-[50%] rounded-2xl border border-t-0 border-gray-200 overflow-hidden">
+                    <section className="join join-vertical rounded-box">
+                        {events.map((event) => {
+                            const isInterested = interested.some(
+                                (interest) =>
+                                    interest.eventid === event.eventid &&
+                                    interest.userid === userId
+                            );
+                            return (
+                                <EventCard
+                                    key={event.eventid}
+                                    event={event}
+                                    interested={isInterested}
+                                />
+                            );
+                        })}
+                    </section>
+                </div>
+            </main>
         </>
     );
 };

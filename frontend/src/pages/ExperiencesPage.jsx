@@ -106,8 +106,12 @@ const ExperiencesPage = () => {
         return (
             <>
                 <div className="w-1/2 min-w-96 m-auto mt-[30vh] opacity-50 select-none">
-                    <h1 className="ml-[20%] text-5xl font-thin">There&apos;s nothing here yet.</h1>
-                    <p className="ml-[21%] text-2xl font-extralight">Be the first one to share your experience :)</p>
+                    <h1 className="ml-[20%] text-5xl font-thin">
+                        There&apos;s nothing here yet.
+                    </h1>
+                    <p className="ml-[21%] text-2xl font-extralight">
+                        Be the first one to share your experience :)
+                    </p>
                 </div>
             </>
         );
@@ -122,15 +126,19 @@ const ExperiencesPage = () => {
                         onClose={closeModal}
                     />
                 )}
-                <section className="join join-vertical px-[30%] mb-5 rounded-box w-full">
-                    {experiences.map((xp) => (
-                        <ExperienceCard
-                            key={xp.xpid}
-                            experience={xp}
-                            onProfileClick={handleProfileClick}
-                        />
-                    ))}
-                </section>
+                <main className="flex w-full justify-center mb-5">
+                    <div className="w-[50%] rounded-2xl border border-gray-200 overflow-hidden">
+                        <section className="join join-vertical w-full">
+                            {experiences.map((xp) => (
+                                <ExperienceCard
+                                    key={xp.xpid}
+                                    experience={xp}
+                                    onProfileClick={handleProfileClick}
+                                />
+                            ))}
+                        </section>
+                    </div>
+                </main>
             </main>
         </>
     );

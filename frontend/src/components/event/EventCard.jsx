@@ -90,7 +90,7 @@ const EventCard = (props) => {
     return (
         <>
             <SponsorModal eventid={eventId} title={event.title} />
-            <div className="flex items-center h-fit card lg:card-side bg-white border-t border-l border-r last:border-b border-gray-200 join-item">
+            <div className="flex items-center h-fit lg:card-side bg-white border-t border-gray-200 join-item">
                 <figure className="min-w-[33%] max-w-[33%]">
                     <img
                         src={image}
