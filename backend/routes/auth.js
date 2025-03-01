@@ -91,4 +91,38 @@ router.post("/signup", upload.single("displaypic"), (req, res) => {
     );
 });
 
+// Get Schools
+router.get('/schools', (req, res) => {
+    db.query('SELECT * FROM school', (err, result) => {
+        const schools = result.map(school => school.schoolname);
+        if (err) {
+            console.error("Error fetching from database:", err);
+            return res
+                .status(500)
+                .send({ error: "Database error" });
+        }
+        res.status(200).send({
+            schools: schools,
+        });
+    })
+});
+
+// Get Courses
+router.get('/courses', (req, res) => {
+    db.query('SELECT * FROM course', (err, result) => {
+        const courses = result.map(course => course.coursename);
+        if (err) {
+            console.error("Error fetching from database:", err);
+            return res
+                .status(500)
+                .send({ error: "Database error" });
+        }
+        res.status(200).send({
+            courses: courses,
+        });
+    })
+});
+
+// Get Courses
+
 module.exports = router;
