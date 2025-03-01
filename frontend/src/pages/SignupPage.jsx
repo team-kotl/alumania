@@ -449,6 +449,17 @@ const SignupPage = () => {
                                 >
                                     <a>Unemployed</a>
                                 </li>
+                                <li
+                                    onClick={() => {
+                                        handleDropdownClick();
+                                        setUserData((values) => ({
+                                            ...values,
+                                            ["employment"]: "Retired",
+                                        }));
+                                    }}
+                                >
+                                    <a>Retired</a>
+                                </li>
                             </ul>
                             {inputError.employment && (
                                 <span className="label-text text-error italic">
