@@ -53,7 +53,7 @@ const OpportunityPane = ({
     return (
         <>
             <div className="relative h-full overflow-hidden">
-                <div className="card bg-white border w-[50%] h-[calc(100vh-7rem)] fixed top-24 right-10 overflow-y-auto p-4">
+                <div className="card bg-white border border-gray-200 w-[50%] h-[calc(100vh-7rem)] fixed top-24 right-10 overflow-y-auto p-4">
                     <div className="card-body">
                         <h1 className="card-title leading-9 text text-primary font-bold text-3xl">
                             {job.title}
