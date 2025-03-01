@@ -170,7 +170,7 @@ const EventCard = (props) => {
                             className="btn btn-sm btn-outline btn-secondary w-[6rem] rounded-full"
                             onClick={() => toggleBanner(`sponsor-${eventId}`)}
                         >
-                            Sponsor
+                            Pledge
                         </button>
                         <button
                             className={`flex overflow-hidden h-[2rem]

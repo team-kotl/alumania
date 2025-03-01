@@ -86,13 +86,13 @@ const SponsorModal = ({ eventid, title }) => {
     return (
         <>
             <dialog id={`sponsor-${eventid}`} className="modal">
-                <div className="modal-box">
+                <div className="modal-box max-w-xl">
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                             ✕
                         </button>
                     </form>
-                    <h3 className="font-bold text-lg">Sponsor {title}</h3>
+                    <h3 className="font-bold text-lg">Pledge sponsorship to {title}</h3>
                     <form
                         onSubmit={handleSubmit}
                         className="flex flex-col gap-5 justify-center items-center mt-5"

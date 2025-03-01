@@ -8,10 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import SponsorModal from "../event/SponsorModal";
 /**
  * that displays event details, allows users to show interest in an event, and toggle the display of descriptions.
  */
- 
+
 const EventSearchCard = (props) => {
     const event = props.event;
     const userId = localStorage.getItem("userid").replace(/['"]+/g, "");
@@ -108,6 +109,7 @@ const EventSearchCard = (props) => {
 
     return (
         <>
+            <SponsorModal eventid={eventId} title={event.title} />
             <div className="flex items-center h-fit card lg:card-side bg-white first:rounded-t-2xl last:rounded-b-2xl border-x border-t last:border-b border-gray-200 join-item">
                 <figure className="min-w-[33%] max-w-[33%]">
                     <img
@@ -184,7 +186,10 @@ const EventSearchCard = (props) => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-sm btn-outline btn-secondary w-[6rem] rounded-full">
+                        <button
+                            className="btn btn-sm btn-outline btn-secondary w-[6rem] rounded-full"
+                            onClick={() => toggleBanner(`sponsor-${eventId}`)}
+                        >
                             Pledge
                         </button>
                         <button

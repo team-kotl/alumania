@@ -202,7 +202,7 @@ const ProfilePage = () => {
             <ProfilePictureUpload onImageUpload={onImageUpload} />
             <SetVisibilityModal userid={userid} isVisible={profile.private} />
             <section className="join join-vertical px-[30%] my-5 rounded-box w-full ">
-                <div className="flex join-item flex-row w-full border p-3 bg-white">
+                <div className="flex join-item flex-row w-full border border-gray-200 p-3 bg-white">
                     <div className="flex flex-col w-[80%] pl-6 pt-6">
                         <span className="text-2xl font-bold">
                             {profile.fullName}
@@ -233,7 +233,7 @@ const ProfilePage = () => {
                         {avatar}
                     </div>
                 </div>
-                <div className="flex flex-row justify-center bg-white border-x pb-3">
+                <div className="flex flex-row justify-center bg-white border-x border-gray-200 pb-3">
                     <div className="flex flex-row gap-1 text-primary px-5 hover:opacity-50">
                         <FontAwesomeIcon icon={faUserEdit} />
                         <span
@@ -261,13 +261,13 @@ const ProfilePage = () => {
                         </span>
                     </div> */}
                 </div>
-                <div className="join-item flex border p-1 align-middle bg-white">
+                <div className="join-item flex border border-gray-200 p-1 align-middle bg-white">
                     <span className="w-full text-center text-gray-400">
                         Experiences
                     </span>
                 </div>
                 {error ? (
-                    <div className="join-item border pb-6">
+                    <div className="join-item border border-gray-200 pb-6">
                         <ErrorHero />
                     </div>
                 ) : experiences.length > 0 ? (
@@ -275,7 +275,7 @@ const ProfilePage = () => {
                         <ProfileExperienceCard key={xp.xpid} experience={xp} />
                     ))
                 ) : (
-                    <div className="join-item flex bg-white border p-4">
+                    <div className="join-item flex bg-white border border-gray-200 p-4">
                         <span className="text-xl text-gray-400 text-center w-full">
                             No experiences shared yet
                         </span>
