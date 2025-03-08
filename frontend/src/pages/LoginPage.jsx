@@ -113,7 +113,7 @@ const LoginPage = () => {
                     />
                     <input
                         type="submit"
-                        className="btn btn-wide block btn-secondary"
+                        className="btn btn-wide block btn-primary"
                         value="Login"
                     />
                 </form>

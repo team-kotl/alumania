@@ -711,7 +711,7 @@ const SignupPage = () => {
                     <div className="flex flex-row gap-5 justify-center items-center w-10/12 mt-10">
                         <input
                             type="submit"
-                            className="btn btn-wide block btn-secondary"
+                            className="btn btn-wide block btn-primary"
                             value="Signup"
                         />
                     </div>
