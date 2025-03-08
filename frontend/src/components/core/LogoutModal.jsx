@@ -11,7 +11,7 @@ const LogoutModal = (props) => {
                     <p className="py-4">Are you sure you want to logout?</p>
                     <div className="modal-action">
                         <button
-                            className="btn btn-warning text-white"
+                            className="btn btn-error text-white"
                             onClick={() => {
                                 props.auth();
                             }}

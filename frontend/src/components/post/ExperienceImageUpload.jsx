@@ -191,7 +191,7 @@ const ExperienceImageUpload = ({ onImageUpload }) => {
                     </div>
                     {previewUrls.length ? (
                         <button
-                            className="btn btn-sm btn-secondary w-full rounded-full"
+                            className="btn btn-sm btn-primary w-full rounded-full"
                             onClick={handleConfirm}
                         >
                             Confirm

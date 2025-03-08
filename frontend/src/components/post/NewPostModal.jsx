@@ -114,7 +114,7 @@ const NewPostModal = ({ handleAddPost }) => {
     const avatar = dpImage ? (
         <div className="avatar justify-center">
             <div
-                className="ring-secondary ring-offset-base-100 w-12 h-12 rounded-full ring ring-offset-2"
+                className="ring-primary ring-offset-base-100 w-12 h-12 rounded-full ring ring-offset-2"
                 onClick={() =>
                     document.getElementById("uploadpfp_modal").showModal()
                 }
@@ -125,7 +125,7 @@ const NewPostModal = ({ handleAddPost }) => {
     ) : (
         <div className="avatar placeholder">
             <div
-                className="bg-primary text-neutral-content w-12 h-12 rounded-full ring ring-offset-2 ring-secondary ring-offset-base-100"
+                className="bg-primary text-neutral-content w-12 h-12 rounded-full ring ring-offset-2 ring-primary ring-offset-base-100"
                 onClick={() =>
                     document.getElementById("uploadpfp_modal").showModal()
                 }
@@ -188,7 +188,7 @@ const NewPostModal = ({ handleAddPost }) => {
                                 </p>
                                 <div className="flex flex-row items-center gap-3">
                                     <button
-                                        className="btn btn-xs btn-outline btn-secondary"
+                                        className="btn btn-xs btn-outline btn-primary"
                                         onClick={handleImageClick}
                                     >
                                         <FontAwesomeIcon icon={faPhotoFilm} />
@@ -203,7 +203,7 @@ const NewPostModal = ({ handleAddPost }) => {
                                         {errorMessage}
                                     </span>
                                     <button
-                                        className="btn btn-secondary btn-sm w-[5rem] rounded-full transition-all hover:scale-105"
+                                        className="btn btn-primary btn-sm w-[5rem] rounded-full transition-all hover:scale-105"
                                         type="submit"
                                     >
                                         Post
