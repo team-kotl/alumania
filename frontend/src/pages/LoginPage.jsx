@@ -59,11 +59,6 @@ const LoginPage = () => {
             return;
         }
 
-        if (credentials["password"].length < 4) {
-            setHasError(true);
-            return;
-        }
-
         axios
             .post("http://localhost:2012/auth/login", credentials)
             .then((res) => {
