@@ -151,7 +151,7 @@ const ExperienceCard = ({ experience, onProfileClick }) => {
 
     return (
         <>
-            <div className="justify-self-center join-item w-full bg-white border-b last:border-b-0 border-gray-200 p-4 space-y-2">
+            <div className="justify-self-center join-item w-full bg-white border-t first:border-t-0 border-gray-200 p-4 space-y-2">
                 <div className="flex mt-4 ml-4 mr-4 items-start space-x-5">
                     {avatar}
                     <div className="flex flex-col w-full">
