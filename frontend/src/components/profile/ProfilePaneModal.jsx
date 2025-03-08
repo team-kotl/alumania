@@ -236,7 +236,7 @@ const ProfilePaneModal = ({ userid, onClose }) => {
                                 {avatar}
                             </div>
                         </div>
-                        <div className="join-item flex p-1 align-middle bg-white">
+                        <div className="join-item border-t border-gray-200 flex p-1 align-middle bg-white">
                             <span className="w-full text-center text-gray-400">
                                 Experiences
                             </span>
