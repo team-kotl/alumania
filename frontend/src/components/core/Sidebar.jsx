@@ -7,7 +7,7 @@ import {
     PiSignOutFill,
     PiUser,
     PiChatCircle,
-    PiBellLight 
+    PiBellLight,
 } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/logo.svg";
@@ -22,6 +22,7 @@ import LogoutModal from "./LogoutModal";
 const SideBar = () => {
     const { logout } = useAuth();
     const [addPost, setAddPost] = useState(false);
+    const [notifOpen, setNotifOpen] = useState(false);
 
     const handleLogout = () => {
         document.getElementById("logout_modal").showModal();
@@ -56,7 +57,7 @@ const SideBar = () => {
                             </div>
                         )}
                     </NavLink>
-                    
+
                     <NavLink to="/app/chat">
                         {({ isActive }) => (
                             <div className="flex items-center gap-1">
@@ -107,24 +108,21 @@ const SideBar = () => {
                         <PiPlusCircle />
                     </span>
 
-                    <NavLink to="/app/notifications">
-                        {({ isActive }) => (
-                            <div className="flex items-center gap-1">
-                                {isActive && (
-                                    <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
-                                )}
-                                <span
-                                    className={`text-2xl cursor-pointer ${
-                                        isActive
-                                            ? "text-primary transition-all translate-x-2"
-                                            : "text-[#A29C9C] transition-all hover:text-primary"
-                                    }`}
-                                >
-                                    <PiBellLight />
-                                </span>
-                            </div>
+                    <div className="flex items-center gap-1">
+                        {notifOpen && (
+                            <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
                         )}
-                    </NavLink>
+                        <span
+                            className={`text-2xl cursor-pointer ${
+                                notifOpen
+                                    ? "text-primary transition-all translate-x-2"
+                                    : "text-[#A29C9C] transition-all hover:text-primary"
+                            }`}
+                            onClick={() => setNotifOpen((prev) => !prev)}
+                        >
+                            <PiBellLight />
+                        </span>
+                    </div>
 
                     <NavLink to="/app/profile">
                         {({ isActive }) => (
