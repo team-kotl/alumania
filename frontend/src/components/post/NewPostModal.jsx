@@ -1,8 +1,7 @@
 // Author: @hiimjude Jude Angelo Ilumin
 //         @yukiroow Harry Dominguez
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
+import { PiImagesLight } from "react-icons/pi";
 import ExperienceImageUpload from "./ExperienceImageUpload";
 import axios from "axios";
 
@@ -191,7 +190,7 @@ const NewPostModal = ({ handleAddPost }) => {
                                         className="btn btn-xs btn-outline btn-primary"
                                         onClick={handleImageClick}
                                     >
-                                        <FontAwesomeIcon icon={faPhotoFilm} />
+                                        <PiImagesLight />
                                         Add Photos
                                     </button>
                                     <span className="text-gray-400 text-xs">

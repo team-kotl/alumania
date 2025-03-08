@@ -1,14 +1,9 @@
 // Author: @yukiroow Harry Dominguez
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faBuilding,
-    faLocationDot,
-    faStar,
-} from "@fortawesome/free-solid-svg-icons";
+import { PiBuilding, PiMapPinArea, PiStar } from "react-icons/pi";
 import axios from "axios";
 import { useState, useEffect } from "react";
 /**
- * JobModal component, which displays detailed information about a job when a user clicks on it. 
+ * JobModal component, which displays detailed information about a job when a user clicks on it.
  */
 const JobModal = ({ job, calculateTimeAgo, onClose }) => {
     const userId = localStorage.getItem("userid").replace(/['"]+/g, "");
@@ -88,17 +83,11 @@ const JobModal = ({ job, calculateTimeAgo, onClose }) => {
                                     {calculateTimeAgo(job.publishtimestamp)}
                                 </div>
                                 <div className="flex items-center space-x-2 font-semibold text-gray-700 mt-2">
-                                    <FontAwesomeIcon
-                                        icon={faBuilding}
-                                        className="h-5 w-5 text-primary"
-                                    />
+                                    <PiBuilding className="h-5 w-5 text-primary" />
                                     <p>{job.companyname}</p>
                                 </div>
                                 <div className="flex items-center space-x-2 text-gray-700">
-                                    <FontAwesomeIcon
-                                        icon={faLocationDot}
-                                        className="h-5 w-5 text-primary"
-                                    />
+                                    <PiMapPinArea className="h-5 w-5 text-primary" />
                                     <p>{job.location}</p>
                                 </div>
                                 <div className="flex gap-2">
@@ -119,7 +108,7 @@ const JobModal = ({ job, calculateTimeAgo, onClose }) => {
                                                 : handleInterested
                                         }
                                     >
-                                        <FontAwesomeIcon icon={faStar} />
+                                        <PiStar />
                                         {!interested
                                             ? "Mark as Interested"
                                             : "Interested"}

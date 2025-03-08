@@ -41,7 +41,7 @@ const SetVisibilityModal = ({ userid, isVisible }) => {
                     <div className="modal-action">
                         <form method="dialog" className="flex space-x-2">
                             <button
-                                className="btn btn-warning text-white"
+                                className="btn btn-error text-white"
                                 onClick={handleConfirmClick}
                             >
                                 Confirm

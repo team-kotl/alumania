@@ -1,9 +1,7 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 
 import { useEffect, useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { PiHeart, PiHeartFill } from "react-icons/pi";
 import axios from "axios";
 import DeletePostModal from "./DeletePostModal";
 /**
@@ -128,7 +126,7 @@ const ProfileExperienceCard = ({ experience }) => {
                       (data, byte) => data + String.fromCharCode(byte),
                       ""
                   )
-              )}` 
+              )}`
             : null
         : null;
 
@@ -219,15 +217,21 @@ const ProfileExperienceCard = ({ experience }) => {
                 )}
                 <div className="flex justify-start items-center space-x-4 mt-4 mx-20">
                     <div className="flex items-center space-x-2 mt-1">
-                        <FontAwesomeIcon
-                            icon={liked ? faHeartSolid : faHeartRegular}
-                            className={`text-xl cursor-pointer transition-all ${
-                                liked
-                                    ? "text-red-500 hover:scale-95 hover:opacity-90"
-                                    : "text-primary hover:scale-105 hover:opacity-90"
-                            }`}
-                            onClick={handleLikeClick}
-                        />
+                        {liked ? (
+                            <span
+                                className="text-xl cursor-pointer transition-all text-red-500 hover:scale-95 hover:opacity-90"
+                                onClick={handleLikeClick}
+                            >
+                                <PiHeartFill />
+                            </span>
+                        ) : (
+                            <span
+                                className="text-xl cursor-pointer transition-all text-primary hover:scale-105 hover:opacity-90"
+                                onClick={handleLikeClick}
+                            >
+                                <PiHeart />
+                            </span>
+                        )}
                         <p className="text-sm text-gray-400">{likeCount}</p>
                     </div>
                 </div>

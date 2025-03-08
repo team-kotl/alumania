@@ -1,8 +1,7 @@
 // Author: @yukiroow Harry Dominguez
 
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { PiPlus } from "react-icons/pi";
 /**
  * Profile Picture Upload component that allows the user to upload a new profile photo.
  * Displays a preview of the selected image and includes options to cancel or confirm the upload.
@@ -54,10 +53,7 @@ const ProfilePictureUpload = ({ onImageUpload }) => {
                             />
                         ) : (
                             <>
-                                <FontAwesomeIcon
-                                    icon={faPlus}
-                                    className="w-10 h-10 text-gray-500"
-                                />
+                                <PiPlus className="w-10 h-10 text-gray-500" />
                                 <p className="mt-2 text-gray-500">Click here</p>
                                 <p className="text-gray-500 text-sm">
                                     to upload a file

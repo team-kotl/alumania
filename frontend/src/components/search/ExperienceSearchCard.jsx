@@ -1,13 +1,11 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 //         @yukiroow Harry Dominguez
 import { useEffect, useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { PiHeart, PiHeartFill } from "react-icons/pi";
 import axios from "axios";
 
 /**
- * ExperienceSearchCard component is used to display an experience post with the user's display picture or initials, 
+ * ExperienceSearchCard component is used to display an experience post with the user's display picture or initials,
  */
 const ExperienceSearchCard = ({ experience }) => {
     const [liked, setLiked] = useState(false);
@@ -152,16 +150,14 @@ const ExperienceSearchCard = ({ experience }) => {
                     {avatar}
                     <div className="flex flex-col w-full">
                         <div className="flex items-center space-x-2 mt-1">
-                            <p
-                                className="font-medium"
-                            >
-                                {experience.username}
-                            </p>
+                            <p className="font-medium">{experience.username}</p>
                             <p className="font-light text-gray-500 text-xs">
                                 {calculateTimeAgo(experience.publishtimestamp)}
                             </p>
                         </div>
-                        <p className="mt-3 text-sm whitespace-pre-line">{experience.body}</p>
+                        <p className="mt-3 text-sm whitespace-pre-line">
+                            {experience.body}
+                        </p>
                     </div>
                 </div>
                 {experience.images.length > 0 ? (
@@ -203,15 +199,21 @@ const ExperienceSearchCard = ({ experience }) => {
                 )}
                 <div className="flex justify-start items-center space-x-4 mt-4 mx-20">
                     <div className="flex items-center space-x-2 mt-1">
-                        <FontAwesomeIcon
-                            icon={liked ? faHeartSolid : faHeartRegular}
-                            className={`text-xl cursor-pointer transition-all ${
-                                liked
-                                    ? "text-red-500 hover:scale-95 hover:opacity-90"
-                                    : "text-primary hover:scale-105 hover:opacity-90"
-                            }`}
-                            onClick={handleLikeClick}
-                        />
+                        {liked ? (
+                            <span
+                                className="text-xl cursor-pointer transition-all text-red-500 hover:scale-95 hover:opacity-90"
+                                onClick={handleLikeClick}
+                            >
+                                <PiHeartFill />
+                            </span>
+                        ) : (
+                            <span
+                                className="text-xl cursor-pointer transition-all text-primary hover:scale-105 hover:opacity-90"
+                                onClick={handleLikeClick}
+                            >
+                                <PiHeart />
+                            </span>
+                        )}
                         <p className="text-sm text-gray-400">{likeCount}</p>
                     </div>
                 </div>

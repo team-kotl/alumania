@@ -1,12 +1,11 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 //         @yukiroow Harry Dominguez
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faSearch,
-    faSortAmountDesc,
-    faSortAmountAsc,
-} from "@fortawesome/free-solid-svg-icons";
+    PiMagnifyingGlass,
+    PiSortAscending,
+    PiSortDescending,
+} from "react-icons/pi";
 /**
  * SearchBar component provides a UI for searching, filtering, and sorting content.
  * It includes a search input field, a dropdown to select a filter (Users, Experiences, Jobs, Events),
@@ -40,10 +39,7 @@ const SearchBar = ({ setSearchQuery, setFilter, setSortOrder, setResults }) => {
         <>
             <div className="relative flex justify-center items-center h-8 mt-7 text-base">
                 <div className="flex items-center bg-[#FFFFFF] rounded-l-lg w-3/6 pl-2 focus-within:outline-none focus-within:ring-1 focus-within:ring-blue-500 border border-gray-200">
-                    <FontAwesomeIcon
-                        icon={faSearch}
-                        className="w-5 h-5 text-[#8192a1] ml-2"
-                    />
+                    <PiMagnifyingGlass className="w-5 h-5 text-[#8192a1] ml-2" />
                     <input
                         className="input bg-transparent w-full text-[#4d6c88] focus:outline-none focus:ring-0 border-none"
                         name="query"
@@ -96,15 +92,9 @@ const SearchBar = ({ setSearchQuery, setFilter, setSortOrder, setResults }) => {
                 <div className="dropdown dropdown-bottom">
                     <div tabIndex={0} role="button" className="text-primary">
                         {descending ? (
-                            <FontAwesomeIcon
-                                icon={faSortAmountDesc}
-                                className="cursor-pointer w-8 h-8 text-gray-500 hover:text-gray-700 ml-5"
-                            />
+                            <PiSortDescending className="cursor-pointer w-8 h-8 text-gray-500 hover:text-gray-700 ml-5" />
                         ) : (
-                            <FontAwesomeIcon
-                                icon={faSortAmountAsc}
-                                className="cursor-pointer w-8 h-8 text-gray-500 hover:text-gray-700 ml-5"
-                            />
+                            <PiSortAscending className="cursor-pointer w-8 h-8 text-gray-500 hover:text-gray-700 ml-5" />
                         )}
                     </div>
                     <ul

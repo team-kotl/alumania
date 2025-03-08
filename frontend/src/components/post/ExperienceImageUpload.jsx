@@ -1,13 +1,12 @@
 // Author: @hiimjude Jude Angelo Ilumin
 //         @yukiroow Harry Dominguez
 import { useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faPlus,
-    faFile,
-    faArrowCircleLeft,
-    faArrowCircleRight,
-} from "@fortawesome/free-solid-svg-icons";
+    PiPlus,
+    PiFile,
+    PiArrowCircleRight,
+    PiArrowCircleLeft,
+} from "react-icons/pi";
 
 /**
  * A component for uploading, previewing, and managing images in a modal.
@@ -18,20 +17,17 @@ const ExperienceImageUpload = ({ onImageUpload }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const carouselRef = useRef(null);
 
-    
     const handleDrop = (event) => {
         event.preventDefault();
         const droppedFiles = Array.from(event.dataTransfer.files);
         addFiles(droppedFiles);
     };
 
-    
     const handleFileInput = (event) => {
         const selectedFiles = Array.from(event.target.files);
         addFiles(selectedFiles);
     };
 
-    
     const addFiles = (newFiles) => {
         const totalFiles = newFiles.length;
         if (totalFiles > 10) {
@@ -43,12 +39,10 @@ const ExperienceImageUpload = ({ onImageUpload }) => {
         setPreviewUrls(newFiles.map((file) => URL.createObjectURL(file)));
     };
 
-   
     const handleDragOver = (event) => {
         event.preventDefault();
     };
 
-   
     const handleConfirm = () => {
         onImageUpload(files);
         document.getElementById("uploadimage_modal").close();
@@ -57,14 +51,12 @@ const ExperienceImageUpload = ({ onImageUpload }) => {
         setCurrentIndex(0);
     };
 
-    
     const handleNext = () => {
         if (currentIndex < previewUrls.length - 1) {
             setCurrentIndex(currentIndex + 1);
             scrollToIndex(currentIndex + 1);
         }
     };
-
 
     const handleBack = () => {
         if (currentIndex > 0) {
@@ -133,10 +125,7 @@ const ExperienceImageUpload = ({ onImageUpload }) => {
                                     onClick={handleBack}
                                     disabled={currentIndex === 0}
                                 >
-                                    <FontAwesomeIcon
-                                        icon={faArrowCircleLeft}
-                                        size="xl"
-                                    />
+                                    <PiArrowCircleRight />
                                 </button>
                                 <button
                                     className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary rounded-full p-2 transition-all disabled:hidden hover:opacity-50"
@@ -145,18 +134,12 @@ const ExperienceImageUpload = ({ onImageUpload }) => {
                                         currentIndex === previewUrls.length - 1
                                     }
                                 >
-                                    <FontAwesomeIcon
-                                        icon={faArrowCircleRight}
-                                        size="xl"
-                                    />
+                                    <PiArrowCircleLeft />
                                 </button>
                             </>
                         ) : (
                             <>
-                                <FontAwesomeIcon
-                                    icon={faPlus}
-                                    className="w-10 h-10 text-gray-500"
-                                />
+                                <PiPlus className="w-10 h-10 text-gray-500" />
                                 <p className="mt-2 text-gray-500">
                                     Drag and Drop or Click here
                                 </p>

@@ -1,11 +1,6 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 //         @yukiroow Harry Dominguez
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faMapLocation,
-    faCalendar,
-    faClock,
-} from "@fortawesome/free-solid-svg-icons";
+import { PiMapPinArea, PiCalendar, PiClock } from "react-icons/pi";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SponsorModal from "../event/SponsorModal";
@@ -146,17 +141,11 @@ const EventSearchCard = (props) => {
                     </p>
                     <div className="flex flex-col items-start space-y-1.5 text-gray-600">
                         <div className="flex space-x-2">
-                            <FontAwesomeIcon
-                                icon={faMapLocation}
-                                className="w-5 h-5 text-primary mr-1"
-                            />
+                            <PiMapPinArea className="w-5 h-5 text-primary mr-1" />
                             <p>{event.eventloc}</p>
                         </div>
                         <div className="flex space-x-2">
-                            <FontAwesomeIcon
-                                icon={faCalendar}
-                                className="w-5 h-5 text-primary mr-1"
-                            />
+                            <PiCalendar className="w-5 h-5 text-primary mr-1" />
                             <p>
                                 {new Date(event.eventdate).toLocaleDateString(
                                     "en-US",
@@ -169,10 +158,7 @@ const EventSearchCard = (props) => {
                             </p>
                         </div>
                         <div className="flex space-x-2">
-                            <FontAwesomeIcon
-                                icon={faClock}
-                                className="w-5 h-5 text-primary mr-1"
-                            />
+                            <PiClock className="w-5 h-5 text-primary mr-1" />
                             <p>
                                 {new Date(
                                     "1970-01-01T" + event.eventtime + "Z"

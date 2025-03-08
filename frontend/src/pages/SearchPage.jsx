@@ -3,8 +3,7 @@ import axios from "axios";
 import SearchBar from "../components/search/SearchBar";
 import ErrorHero from "../components/ErrorHero";
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlassMinus } from "@fortawesome/free-solid-svg-icons";
+import { PiMagnifyingGlass, PiMagnifyingGlassMinusThin } from "react-icons/pi";
 import UserSearchCard from "../components/search/UserSearchCard";
 import JobSearchCard from "../components/search/JobSearchCard";
 import EventSearchCard from "../components/search/EventSearchCard";
@@ -63,7 +62,7 @@ const SearchPage = () => {
 
         const fetchSearch = async () => {
             setLoading(true);
-            if(searchQuery === "") return;
+            if (searchQuery === "") return;
             try {
                 if (filter === "experiences") {
                     fetchExperiences();
@@ -170,15 +169,8 @@ const NoResultsHero = () => {
     return (
         <>
             <div>
-                <section className="block m-auto w-2/5 mt-40">
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlassMinus}
-                        size="10x"
-                        className="text-secondary"
-                    />
-                </section>
                 <section>
-                    <div className="block m-auto w-2/5">
+                    <div className="block m-auto w-2/5 mt-40">
                         <h1 className="text-7xl mt-5 mb-5 text-secondary font-semibold">
                             There&apos;s nothing here
                         </h1>

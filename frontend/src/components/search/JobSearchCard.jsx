@@ -1,7 +1,6 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 //         @yukiroow Harry Dominguez
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding, faMapLocation } from "@fortawesome/free-solid-svg-icons";
+import { PiBuilding, PiMapPinArea } from "react-icons/pi";
 import { useState } from "react";
 import JobModal from "./JobModal";
 /**
@@ -74,17 +73,16 @@ const JobSearchCard = ({ job }) => {
                     {calculateTimeAgo(job.publishtimestamp)}
                 </p>
                 <div className="flex items-center space-x-2 font-semibold text-gray-700 mt-2">
-                    <FontAwesomeIcon
-                        icon={faBuilding}
-                        className="h-5 w-5 text-primary"
-                    />
+                    <PiBuilding className="h-5 w-5 text-primary" />
                     <p>{job.companyname}</p>
                 </div>
                 <div className="flex items-center space-x-2 text-gray-700">
-                    <FontAwesomeIcon icon={faMapLocation} className="h-5 w-5" />
+                    <PiMapPinArea className="h-5 w-5" />
                     <p>{job.location}</p>
                 </div>
-                <p className="mt-4 ml-7 text-primary whitespace-pre-line line-clamp-3">{job.description}</p>
+                <p className="mt-4 ml-7 text-primary whitespace-pre-line line-clamp-3">
+                    {job.description}
+                </p>
             </div>
         </>
     );

@@ -1,6 +1,5 @@
 // Author: @yukiroow Harry Dominguez
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PiWarningCircleThin } from "react-icons/pi";
 /**
  * ErrorHero component that displays an error message and an option to refresh the page.
  * It shows a warning icon, a message about the error, and a button to reload the page.
@@ -10,8 +9,7 @@ const ErrorHero = () => {
         <>
             <div>
                 <section className="block m-auto w-2/5 mt-40">
-                    <FontAwesomeIcon
-                        icon={faCircleExclamation}
+                    <PiWarningCircleThin
                         size="10x"
                         className="text-secondary"
                     />

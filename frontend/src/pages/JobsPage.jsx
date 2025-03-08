@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import ErrorHero from "../components/ErrorHero";
 import OpportunityCard from "../components/opportunity/OpportunityCard";
 import OpportunityPane from "../components/opportunity/OpportunityPane";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonThroughWindow } from "@fortawesome/free-solid-svg-icons";
+import { PiBriefcaseThin } from "react-icons/pi";
 
 /**
  * The events page containing all the jobs from the database.
@@ -128,9 +127,8 @@ const JobsPage = () => {
                     <div className="relative h-full overflow-hidden">
                         <div className="card bg-white border border-gray-200 w-[50%] h-[calc(100vh-7rem)] fixed top-24 right-10 overflow-y-auto p-4">
                             <div className="card-body">
-                                <FontAwesomeIcon
-                                    icon={faPersonThroughWindow}
-                                    size="5x"
+                                <PiBriefcaseThin
+                                    size="30"
                                     className="opacity-40 mt-[25%]"
                                     color="#032543"
                                 />

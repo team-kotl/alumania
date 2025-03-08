@@ -1,11 +1,5 @@
 // Author @yukiroow Harry Dominguez
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faEye,
-    faEyeSlash,
-    faUserEdit,
-    faEdit
-} from "@fortawesome/free-solid-svg-icons";
+import { PiEyeLight, PiEyeSlashThin } from "react-icons/pi";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ErrorHero from "../components/ErrorHero";
@@ -204,23 +198,35 @@ const ProfilePage = () => {
             <section className="join join-vertical px-[30%] my-5 rounded-box w-full ">
                 <div className="flex join-item flex-row w-full border border-gray-200 p-3 bg-white">
                     <div className="flex flex-col w-[80%] pl-6 pt-6">
-                        <span className="text-2xl font-bold">
+                        <span className="flex text-2xl font-bold items-end">
                             {profile.fullName}
-                            <FontAwesomeIcon
-                                icon={profile.private ? faEyeSlash : faEye}
-                                className="text-gray-500 cursor-pointer ml-2 transition-all hover:opacity-50"
-                                size="xs"
-                                title={
-                                    profile.private
-                                        ? "Profile is private"
-                                        : "Profile is public"
-                                }
-                                onClick={() =>
-                                    document
-                                        .getElementById(`visibility_modal`)
-                                        .showModal()
-                                }
-                            />
+                            {profile.private ? (
+                                <span className="text-gray-500 cursor-pointer ml-2 transition-all hover:opacity-50">
+                                    <PiEyeSlashThin
+                                        title="Profile is private"
+                                        onClick={() =>
+                                            document
+                                                .getElementById(
+                                                    `visibility_modal`
+                                                )
+                                                .showModal()
+                                        }
+                                    />
+                                </span>
+                            ) : (
+                                <span className="text-gray-500 cursor-pointer ml-2 transition-all hover:opacity-50">
+                                    <PiEyeLight
+                                        title="Profile is public"
+                                        onClick={() =>
+                                            document
+                                                .getElementById(
+                                                    `visibility_modal`
+                                                )
+                                                .showModal()
+                                        }
+                                    />
+                                </span>
+                            )}
                         </span>
                         <span className="text-base mb-1">{username}</span>
                         <span className="text-sm text-gray-400 self-flex-end mb-1">
@@ -235,7 +241,6 @@ const ProfilePage = () => {
                 </div>
                 <div className="flex flex-row justify-center bg-white border-x border-gray-200 pb-3">
                     <div className="flex flex-row gap-1 text-primary px-5 hover:opacity-50">
-                        <FontAwesomeIcon icon={faUserEdit} />
                         <span
                             className="text-sm self-flex-end cursor-pointer select-none"
                             onClick={() =>

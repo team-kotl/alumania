@@ -1,13 +1,12 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 //         @yukiroow Harry Dominguez
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faHome,
-    faSearch,
-    faPlusCircle,
-    faSignOutAlt,
-    faUser,
-} from "@fortawesome/free-solid-svg-icons";
+    PiHouseFill,
+    PiMagnifyingGlassBold,
+    PiPlusCircle,
+    PiSignOutFill,
+    PiUserFill,
+} from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/logo.svg";
 import { useAuth } from "../../hooks/useAuth";
@@ -43,14 +42,15 @@ const SideBar = () => {
                                 {isActive && (
                                     <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
                                 )}
-                                <FontAwesomeIcon
-                                    icon={faHome}
+                                <span
                                     className={`text-2xl cursor-pointer ${
                                         isActive
                                             ? "text-[#032543] transition-all translate-x-2"
                                             : "text-[#A29C9C] transition-all hover:text-[#032543]"
                                     }`}
-                                />
+                                >
+                                    <PiHouseFill />
+                                </span>
                             </div>
                         )}
                     </NavLink>
@@ -60,19 +60,19 @@ const SideBar = () => {
                                 {isActive && (
                                     <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
                                 )}
-                                <FontAwesomeIcon
-                                    icon={faSearch}
+                                <span
                                     className={`text-2xl cursor-pointer ${
                                         isActive
                                             ? "text-primary transition-all translate-x-2"
                                             : "text-[#A29C9C] transition-all hover:text-primary"
                                     }`}
-                                />
+                                >
+                                    <PiMagnifyingGlassBold />
+                                </span>
                             </div>
                         )}
                     </NavLink>
-                    <FontAwesomeIcon
-                        icon={faPlusCircle}
+                    <span
                         className={`text-2xl cursor-pointer 
                             ${
                                 addPost
@@ -80,26 +80,29 @@ const SideBar = () => {
                                     : "text-[#A29C9C] hover:text-primary"
                             }`}
                         onClick={handleAddPost}
-                    />
+                    >
+                        <PiPlusCircle />
+                    </span>
+
                     <NavLink to="/app/profile">
                         {({ isActive }) => (
                             <div className="flex items-center gap-1">
                                 {isActive && (
                                     <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
                                 )}
-                                <FontAwesomeIcon
-                                    icon={faUser}
+                                <span
                                     className={`text-2xl cursor-pointer ${
                                         isActive
                                             ? "text-primary transition-all translate-x-2"
                                             : "text-[#A29C9C] transition-all hover:text-primary"
                                     }`}
-                                />
+                                >
+                                    <PiUserFill />
+                                </span>
                             </div>
                         )}
                     </NavLink>
-                    <FontAwesomeIcon
-                        icon={faSignOutAlt}
+                    <PiSignOutFill
                         onClick={handleLogout}
                         className="text-2xl text-[#A29C9C] hover:text-[#032543]"
                     />

@@ -3,8 +3,7 @@
 /**
  * Oppurtunity Card for the list of all the jobs
  */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { PiBuilding, PiMapPinArea } from "react-icons/pi";
 
 const OpportunityCard = ({
     job,
@@ -34,18 +33,12 @@ const OpportunityCard = ({
                 {calculateTimeAgo(job.publishtimestamp)}
             </p>
             <div className="flex items-center space-x-1 font-semibold text-gray-500 mt-2">
-                <div className="flex-1">
-                    <FontAwesomeIcon
-                        icon={faBuilding}
-                        className="h-5 w-5 text-gray-500 mr-2"
-                    />
+                <div className="flex flex-1">
+                    <PiBuilding className="h-5 w-5 text-gray-500 mr-2" />
                     <p className="inline-block">{job.companyname}</p>
                 </div>
-                <div className="flex-1">
-                    <FontAwesomeIcon
-                        icon={faLocationDot}
-                        className="h-5 w-5 text-gray-500 mr-2"
-                    />
+                <div className="flex flex-1">
+                    <PiMapPinArea className="h-5 w-5 text-gray-500 mr-2" />
                     <p className="inline-block">{job.location}</p>
                 </div>
             </div>
