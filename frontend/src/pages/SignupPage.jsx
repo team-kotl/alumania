@@ -28,6 +28,8 @@ const SignupPage = () => {
         confirmPassword: "",
         displaypic: null,
     });
+    const [schools, setSchools] = useState([]);
+    const [courses, setCourses] = useState([]);
 
     const [inputError, setInputError] = useState({
         firstName: "",
@@ -52,6 +54,22 @@ const SignupPage = () => {
     const [error, setError] = useState("");
 
     const [success, setSuccess] = useState(false);
+
+    useEffect(() => {
+        const fetchDropdown = async () => {
+            await axios
+                .get("http://localhost:2012/auth/schools")
+                .then((res) => {
+                    setSchools(res.data.schools);
+                });
+            await axios
+                .get("http://localhost:2012/auth/courses")
+                .then((res) => {
+                    setCourses(res.data.courses);
+                });
+        };
+        fetchDropdown();
+    }, []);
 
     useEffect(() => {
         if (error) {
@@ -79,6 +97,10 @@ const SignupPage = () => {
         if (menu) {
             menu.blur();
         }
+    };
+
+    const handleDropdownInput = (name, value) => {
+        setUserData((values) => ({ ...values, [name]: value }));
     };
 
     const handleFileChange = (event) => {
@@ -407,7 +429,7 @@ const SignupPage = () => {
                             <div
                                 tabIndex={0}
                                 role="button"
-                                className="btn w-full"
+                                className="select w-full"
                             >
                                 {userData["employment"] || "Select"}
                             </div>
@@ -474,7 +496,7 @@ const SignupPage = () => {
                             <div
                                 tabIndex={0}
                                 role="button"
-                                className="btn w-full"
+                                className="select w-full"
                             >
                                 {userData["location"] || "Select"}
                             </div>
@@ -565,17 +587,23 @@ const SignupPage = () => {
                             <div className="label">
                                 <span className="label-text">School*</span>
                             </div>
-                            <input
-                                type="text"
+                            <select
                                 name="school"
-                                placeholder="Enter your school (SABM, SEA, etc.)"
-                                className="input input-bordered w-full max-w-xs"
-                                value={userData["school"]}
-                                onChange={(e) => {
-                                    if (e.target.value.length > 20) return;
-                                    handleFormInput(e);
-                                }}
-                            />
+                                className="w-full max-w-xs select"
+                                defaultValue="School"
+                            >
+                                <option disabled={true}>School</option>
+                                {schools.map((value) => (
+                                    <option
+                                        key={value}
+                                        onClick={() =>
+                                            handleDropdownInput('school', value)
+                                        }
+                                    >
+                                        {value}
+                                    </option>
+                                ))}
+                            </select>
                             {inputError.school && (
                                 <span className="label-text text-error italic">
                                     {inputError.school}
@@ -586,17 +614,23 @@ const SignupPage = () => {
                             <div className="label">
                                 <span className="label-text">Course*</span>
                             </div>
-                            <input
-                                type="text"
-                                name="course"
-                                placeholder="Enter your course (Ex. BSIT, BSN, etc.)"
-                                className="input input-bordered w-full max-w-xs"
-                                value={userData["course"]}
-                                onChange={(e) => {
-                                    if (e.target.value.length > 64) return;
-                                    handleFormInput(e);
-                                }}
-                            />
+                            <select
+                                name="school"
+                                className="w-full max-w-xs select"
+                                defaultValue="Course"
+                            >
+                                <option disabled={true}>Course</option>
+                                {courses.map((value) => (
+                                    <option
+                                        key={value}
+                                        onClick={() =>
+                                            handleDropdownInput('course', value)
+                                        }
+                                    >
+                                        {value}
+                                    </option>
+                                ))}
+                            </select>
                             {inputError.course && (
                                 <span className="label-text text-error italic">
                                     {inputError.course}
