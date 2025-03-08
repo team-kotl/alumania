@@ -1,11 +1,13 @@
 // Author: @PEEACHYBEE Freskkie Encarnacion
 //         @yukiroow Harry Dominguez
 import {
-    PiHouseFill,
-    PiMagnifyingGlassBold,
+    PiHouse,
+    PiMagnifyingGlass,
     PiPlusCircle,
     PiSignOutFill,
-    PiUserFill,
+    PiUser,
+    PiChatCircle,
+    PiBellLight 
 } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/logo.svg";
@@ -49,11 +51,31 @@ const SideBar = () => {
                                             : "text-[#A29C9C] transition-all hover:text-[#032543]"
                                     }`}
                                 >
-                                    <PiHouseFill />
+                                    <PiHouse />
                                 </span>
                             </div>
                         )}
                     </NavLink>
+                    
+                    <NavLink to="/app/chat">
+                        {({ isActive }) => (
+                            <div className="flex items-center gap-1">
+                                {isActive && (
+                                    <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
+                                )}
+                                <span
+                                    className={`text-2xl cursor-pointer ${
+                                        isActive
+                                            ? "text-primary transition-all translate-x-2"
+                                            : "text-[#A29C9C] transition-all hover:text-primary"
+                                    }`}
+                                >
+                                    <PiChatCircle />
+                                </span>
+                            </div>
+                        )}
+                    </NavLink>
+
                     <NavLink to="/app/search">
                         {({ isActive }) => (
                             <div className="flex items-center gap-1">
@@ -67,11 +89,12 @@ const SideBar = () => {
                                             : "text-[#A29C9C] transition-all hover:text-primary"
                                     }`}
                                 >
-                                    <PiMagnifyingGlassBold />
+                                    <PiMagnifyingGlass />
                                 </span>
                             </div>
                         )}
                     </NavLink>
+
                     <span
                         className={`text-2xl cursor-pointer 
                             ${
@@ -83,6 +106,25 @@ const SideBar = () => {
                     >
                         <PiPlusCircle />
                     </span>
+
+                    <NavLink to="/app/notifications">
+                        {({ isActive }) => (
+                            <div className="flex items-center gap-1">
+                                {isActive && (
+                                    <span className="w-1 h-1 rounded-full bg-primary transition-all"></span>
+                                )}
+                                <span
+                                    className={`text-2xl cursor-pointer ${
+                                        isActive
+                                            ? "text-primary transition-all translate-x-2"
+                                            : "text-[#A29C9C] transition-all hover:text-primary"
+                                    }`}
+                                >
+                                    <PiBellLight />
+                                </span>
+                            </div>
+                        )}
+                    </NavLink>
 
                     <NavLink to="/app/profile">
                         {({ isActive }) => (
@@ -97,7 +139,7 @@ const SideBar = () => {
                                             : "text-[#A29C9C] transition-all hover:text-primary"
                                     }`}
                                 >
-                                    <PiUserFill />
+                                    <PiUser />
                                 </span>
                             </div>
                         )}

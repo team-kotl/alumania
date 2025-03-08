@@ -13,6 +13,7 @@ import ProfilePage from "./pages/ProfilePage";
 import RootLayout from "./layouts/RootLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import HomeLayout from "./layouts/HomeLayout";
+import ChatPage from "./pages/ChatPage"
 import { ProtectedRoute } from "./components/core/ProtectedRoute";
 import { AuthProvider } from "./hooks/useAuth";
 
@@ -44,6 +45,7 @@ createRoot(document.getElementById("root")).render(
                         <Route path="events" element={<EventsPage />} />
                         <Route path="opportunities" element={<JobsPage />} />
                     </Route>
+                    <Route path="chat" element={<ChatPage />} />
                     <Route path="search" element={<SearchPage />} />
                     <Route path="profile" element={<ProfilePage />} />
                 </Route>
