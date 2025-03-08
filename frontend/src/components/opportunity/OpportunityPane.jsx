@@ -76,15 +76,15 @@ const OpportunityPane = ({
                             <p>{job.location}</p>
                         </div>
                         <div className="flex gap-2">
-                            <div className="relative flex justify-center items-center w-20 h-6 bg-secondary rounded-r-full rounded-l-full">
-                                <p className="absolute text-secondary-content text-xs font-semibold">
+                            <div className="relative flex justify-center items-center w-20 h-6 bg-primary rounded-r-full rounded-l-full">
+                                <p className="absolute text-primary-content text-xs font-semibold">
                                     {job.type}
                                 </p>
                             </div>
                             <button
                                 className={`btn ${
                                     !isInterested
-                                        ? "btn-outline btn-secondary"
+                                        ? "btn-outline btn-primary"
                                         : "btn-success"
                                 } btn-xs rounded-full transform transition-all hover:scale-105`}
                                 onClick={
@@ -103,27 +103,19 @@ const OpportunityPane = ({
                         <h2 className="text-primary font-bold mt-2 text-xl">
                             Job Details
                         </h2>
-                        <p className="text-primary h-auto flex-grow-0 whitespace-pre-line">
+                        <p className=" h-auto flex-grow-0 whitespace-pre-line">
                             {job.description}
                         </p>
                         <section>
                             <h2 className="text-primary font-bold mt-5 text-xl">
                                 Contact Information
                             </h2>
-                            {job.contactname && (
-                                <p className="text-primary">
-                                    Name: {job.contactname}
-                                </p>
-                            )}
+                            {job.contactname && <p>Name: {job.contactname}</p>}
                             {job.contactemail && (
-                                <p className="text-primary">
-                                    Email: {job.contactemail}
-                                </p>
+                                <p>Email: {job.contactemail}</p>
                             )}
                             {job.contactnumber && (
-                                <p className="text-primary">
-                                    Phone: {job.contactnumber}
-                                </p>
+                                <p>Phone: {job.contactnumber}</p>
                             )}
                         </section>
                     </div>

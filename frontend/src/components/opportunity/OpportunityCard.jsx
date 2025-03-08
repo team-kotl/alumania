@@ -21,11 +21,11 @@ const OpportunityCard = ({
             onClick={() => handleCardClick(job)}
         >
             <div className="flex items-center justify-between">
-                <h2 className="card-title text-2xl text-secondary font-bold line-clamp-1">
+                <h2 className="card-title text-2xl text-primary font-bold line-clamp-1">
                     {job.title}
                 </h2>
-                <div className="relative flex justify-center items-center w-20 h-5 bg-secondary rounded-r-full rounded-l-full">
-                    <p className="absolute text-secondary-content text-xs font-semibold">
+                <div className="relative flex justify-center items-center w-20 h-5 bg-primary rounded-r-full rounded-l-full">
+                    <p className="absolute text-primary-content text-xs font-semibold">
                         {job.type}
                     </p>
                 </div>
