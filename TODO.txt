@@ -12,3 +12,8 @@ Implement Archival
 Implement Emailing Service
 - For notification of pledge
 - For forgot password
+
+
+URGENT:
+- nodemailer
+- Left sidebar should update on new message received

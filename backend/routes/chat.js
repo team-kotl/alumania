@@ -23,6 +23,31 @@ router.get("/recipient", (req, res) => {
     }
 });
 
+// Get Recipient by Name
+router.get("/search", (req, res) => {
+    try {
+        const { search } = req.query;
+        db.query(
+            `SELECT CONCAT(firstname,' ', COALESCE(CONCAT(middlename, ' '), ''), lastname) AS fullname, displaypic, userid FROM alumni WHERE CONCAT(firstname,' ', COALESCE(CONCAT(middlename, ' '), ''), lastname) LIKE ?`,
+            [`%${search}%`],
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({ error: err.message });
+                }
+                const recipients = result.map((recipient) => ({
+                    ...recipient,
+                    displaypic: recipient.displaypic?.toString("base64")
+                }));
+                res.status(200).json(recipients);
+            }
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
 // Get Sender
 router.get("/sender", (req, res) => {
     try {
@@ -77,29 +102,34 @@ router.get("/recipients", async (req, res) => {
             `
             SELECT 
                 u.userid,
-                CONCAT(u.firstname,' ', COALESCE(CONCAT(u.middlename, ' '), ''), u.lastname) AS fullname,
+                CONCAT(u.firstname,' ', COALESCE(CONCAT(u.middlename, ' '), u.lastname)) AS fullname,
                 u.displaypic,
                 MAX(m.timesent) AS last_message_time,
-                MAX(CASE WHEN m.senderid = u.userid THEN m.message END) AS last_message,
+                SUBSTRING_INDEX(GROUP_CONCAT(m.message ORDER BY m.timesent DESC), ',', 1) AS last_message,
                 SUM(CASE WHEN m.recipientid = ? AND m.is_read = 0 THEN 1 ELSE 0 END) AS unread_count
             FROM alumni u
-            JOIN message m ON u.userid = m.senderid OR u.userid = m.recipientid
-            WHERE ? IN (m.senderid, m.recipientid) AND u.userid != ?
+            JOIN message m ON 
+                (u.userid = m.senderid AND m.recipientid = ?) OR 
+                (u.userid = m.recipientid AND m.senderid = ?)
+            WHERE u.userid != ?
             GROUP BY u.userid
             ORDER BY last_message_time DESC
-        `,
-            [userId, userId, userId],
+            `,
+            [userId, userId, userId, userId], // 4 parameters
             (err, result) => {
                 if (err) {
                     console.log(err);
+                    return res.status(500).json({ error: "Database error" });
                 }
-                const recipientsWithImages = result.map(recipient => ({
+
+                const recipients = result.map((recipient) => ({
                     ...recipient,
-                    displaypic: recipient.displaypic 
-                        ? Buffer.from(recipient.displaypic).toString('base64') 
-                        : null
+                    displaypic: recipient.displaypic?.toString("base64"),
+                    last_message_time:
+                        recipient.last_message_time?.toISOString(),
                 }));
-                res.json(recipientsWithImages);
+
+                res.json(recipients);
             }
         );
     } catch (error) {
