@@ -31,6 +31,7 @@ const jobRouter = require("./routes/jobposts");
 const authRouter = require("./routes/auth");
 const searchRouter = require("./routes/search");
 const messageRouter = require("./routes/chat");
+const notificationRouter = require("./routes/notifications");
 
 // Routes
 app.use("/auth", authRouter);
@@ -40,6 +41,7 @@ app.use("/users", userRouter);
 app.use("/jobposts", jobRouter);
 app.use("/search", searchRouter);
 app.use("/chat", messageRouter);
+app.use("/notifications", notificationRouter);
 
 io.on("connection", (socket) => {
     socket.on("join", (userId) => {

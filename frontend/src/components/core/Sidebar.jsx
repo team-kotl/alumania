@@ -15,6 +15,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 import NewPostModal from "../post/NewPostModal";
 import LogoutModal from "./LogoutModal";
+import NotificationModal from "../notifications/NotificationModal";
 
 /**
  * The main navigation bar (side) of the application
@@ -36,6 +37,7 @@ const SideBar = () => {
         <>
             <LogoutModal auth={logout} />
             <NewPostModal handleAddPost={handleAddPost} />
+            <NotificationModal setNotifOpen={setNotifOpen}/>
             <nav className="flex flex-col h-screen w-20 items-center py-9 fixed top-0 left-0 z-50">
                 <img src={Logo} alt="Logo" className="w-10 h-10" />
                 <div className="flex flex-col items-center space-y-9 flex-grow justify-center">
@@ -118,7 +120,12 @@ const SideBar = () => {
                                     ? "text-primary transition-all translate-x-2"
                                     : "text-[#A29C9C] transition-all hover:text-primary"
                             }`}
-                            onClick={() => setNotifOpen((prev) => !prev)}
+                            onClick={() => {
+                                setNotifOpen((prev) => !prev);
+                                document
+                                    .getElementById("notification_modal")
+                                    .showModal();
+                            }}
                         >
                             <PiBellLight />
                         </span>
