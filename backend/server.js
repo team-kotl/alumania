@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
         console.log(`User ${userId} joined room`);
     });
 
-    socket.on("sendMessage", ({ senderId, recipientId, message }) => {
+    socket.on("sendMessage", ({ senderId, recipientId, message, isNew }) => {
         try {
             db.query(
                 "INSERT INTO message (senderid, recipientid, message) VALUES (?, ?, ?)",
@@ -62,6 +62,7 @@ io.on("connection", (socket) => {
                         recipientid: recipientId,
                         message,
                         timesent: new Date(),
+                        isNew: isNew,
                     });
 
                     io.to(senderId).emit("receiveMessage", {
@@ -69,6 +70,7 @@ io.on("connection", (socket) => {
                         recipientid: recipientId,
                         message,
                         timesent: new Date(),
+                        isNew: isNew,
                     });
                 }
             );

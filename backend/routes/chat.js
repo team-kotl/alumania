@@ -124,6 +124,7 @@ router.get("/recipients", async (req, res) => {
 
                 const recipients = result.map((recipient) => ({
                     ...recipient,
+                    unread_count: Number(recipient.unread_count),
                     displaypic: recipient.displaypic?.toString("base64"),
                     last_message_time:
                         recipient.last_message_time?.toISOString(),

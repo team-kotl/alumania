@@ -2,11 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 import { PiMagnifyingGlass, PiPlusCircleLight } from "react-icons/pi";
+import NewChatModal from "../components/chat/NewChatModal";
 
 const ChatPage = () => {
     // const [searchQuery, setSearchQuery] = useState("");
     const socket = useRef(io("http://localhost:2012"));
     const [selectedRecipient, setSelectedRecipient] = useState(null);
+    const [leftLoading, setLeftLoading] = useState(true);
+    const [paneLoading, setPaneLoading] = useState(false);
     const [recipients, setRecipients] = useState([]);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -26,6 +29,7 @@ const ChatPage = () => {
                     `http://localhost:2012/chat/recipients?userid=${userid}`
                 );
                 setRecipients(recipientsRes.data);
+                setLeftLoading(false);
 
                 // Connect to WebSocket after initial load
                 socket.current = io("http://localhost:2012");
@@ -56,6 +60,10 @@ const ChatPage = () => {
 
     // Modified handleNewMessage function
     const handleNewMessage = (message) => {
+        if (message.isNew) {
+            fetchRecipients();
+            return;
+        }
         setRecipients((prev) => {
             const recipientId =
                 message.senderid === userid
@@ -97,17 +105,20 @@ const ChatPage = () => {
     };
 
     const fetchRecipients = async () => {
+        setLeftLoading(true);
         try {
             const res = await axios.get(
                 `http://localhost:2012/chat/recipients?userid=${userid}`
             );
             setRecipients(res.data);
+            setLeftLoading(false);
         } catch (error) {
             console.error("Error fetching recipients:", error);
         }
     };
 
     const handleRecipientClick = async (recipient) => {
+        setPaneLoading(true);
         setSelectedRecipient(recipient);
 
         // Mark messages as read
@@ -125,6 +136,8 @@ const ChatPage = () => {
             `http://localhost:2012/chat?senderid=${userid}&recipientid=${recipient.userid}`
         );
         setMessages(res.data);
+
+        setPaneLoading(false);
     };
 
     const sendMessage = async () => {
@@ -164,7 +177,14 @@ const ChatPage = () => {
 
     return (
         <main className="flex w-full h-screen items-center justify-center">
-            <NewChatModal ws={socket.current} userId={userid} />
+            <NewChatModal
+                ws={socket.current}
+                userId={userid}
+                onNewChat={() => {
+                    fetchRecipients(); // Refresh recipients list after new chat
+                    setSelectedRecipient(null); // Clear current selection
+                }}
+            />
             <div className="flex flex-row w-[calc(100%-10rem)] h-[calc(100vh-7rem)] border rounded-3xl border-gray-200 bg-white">
                 {/* Recipients List */}
                 <div className="min-w-[25%] w-[25%] border-r border-gray-200 flex flex-col">
@@ -191,50 +211,105 @@ const ChatPage = () => {
                     </div>
 
                     <div className="flex-1 overflow-y-auto">
-                        {recipients.map((recipient) => (
-                            <div
-                                key={recipient.userid}
-                                onClick={() => handleRecipientClick(recipient)}
-                                className={`flex items-center p-4 cursor-pointer hover:bg-gray-50 ${
-                                    selectedRecipient?.userid ===
-                                    recipient.userid
-                                        ? "bg-blue-50"
-                                        : ""
-                                }`}
-                            >
-                                <div className="avatar relative">
-                                    <div className="w-12 rounded-full">
-                                        <img
-                                            src={`data:image/png;base64,${recipient.displaypic}`}
-                                        />
-                                    </div>
-                                    {recipient.unread_count > 0 && (
-                                        <span className="absolute -top-1 -right-1 badge badge-primary rounded-full">
-                                            {recipient.unread_count}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="ml-4 flex-1 min-w-0">
-                                    <h3 className="font-semibold text-gray-800 truncate">
-                                        {recipient.fullname}
-                                    </h3>
-                                    <p
-                                        className={`text-sm truncate ${
-                                            recipient.unread_count > 0
-                                                ? "font-bold"
-                                                : "text-gray-500"
+                        {!leftLoading ? (
+                            recipients.length > 0 ? (
+                                recipients.map((recipient) => (
+                                    <div
+                                        key={recipient.userid}
+                                        onClick={() =>
+                                            handleRecipientClick(recipient)
+                                        }
+                                        className={`flex items-center p-4 cursor-pointer hover:bg-gray-50 ${
+                                            selectedRecipient?.userid ===
+                                            recipient.userid
+                                                ? "bg-blue-50"
+                                                : ""
                                         }`}
                                     >
-                                        {recipient.last_message}
-                                    </p>
-                                    <p className="text-xs text-gray-400">
-                                        {new Date(
-                                            recipient.last_message_time
-                                        ).toLocaleTimeString()}
-                                    </p>
+                                        <div className="avatar relative">
+                                            <div className="w-12 rounded-full">
+                                                <img
+                                                    src={`data:image/png;base64,${recipient.displaypic}`}
+                                                />
+                                            </div>
+                                            {recipient.unread_count > 0 && (
+                                                <span className="absolute -top-1 -right-1 badge badge-primary rounded-full">
+                                                    {recipient.unread_count}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="ml-4 flex-1 min-w-0">
+                                            <h3 className="font-semibold text-gray-800 truncate">
+                                                {recipient.fullname}
+                                            </h3>
+                                            <p
+                                                className={`text-sm truncate ${
+                                                    recipient.unread_count > 0
+                                                        ? "font-bold"
+                                                        : "text-gray-500"
+                                                }`}
+                                            >
+                                                {recipient.last_message}
+                                            </p>
+                                            <p className="text-xs text-gray-400">
+                                                {new Date(
+                                                    recipient.last_message_time
+                                                ).toLocaleTimeString()}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="flex w-full h-full text-gray-400 text-xl items-center justify-center">
+                                    No Messages yet
+                                </div>
+                            )
+                        ) : (
+                            <div className="flex flex-col">
+                                <div className="flex items-center gap-4 w-full px-5 pt-5">
+                                    <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <div className="skeleton h-4 w-full"></div>
+                                        <div className="skeleton h-4 w-28"></div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 w-full px-5 pt-5">
+                                    <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <div className="skeleton h-4 w-full"></div>
+                                        <div className="skeleton h-4 w-28"></div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 w-full px-5 pt-5">
+                                    <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <div className="skeleton h-4 w-full"></div>
+                                        <div className="skeleton h-4 w-28"></div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 w-full px-5 pt-5">
+                                    <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <div className="skeleton h-4 w-full"></div>
+                                        <div className="skeleton h-4 w-28"></div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 w-full px-5 pt-5">
+                                    <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <div className="skeleton h-4 w-full"></div>
+                                        <div className="skeleton h-4 w-28"></div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 w-full px-5 pt-5">
+                                    <div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
+                                    <div className="flex flex-col gap-4 w-full">
+                                        <div className="skeleton h-4 w-full"></div>
+                                        <div className="skeleton h-4 w-28"></div>
+                                    </div>
                                 </div>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
 
@@ -250,7 +325,7 @@ const ChatPage = () => {
                                     />
                                 </div>
                             </div>
-                            <h2 className="ml-4 text-lg font-semibold text-gray-800">
+                            <h2 className="ml-4 text-lg font-semibold text-gray-800 w-full">
                                 {selectedRecipient.fullname || "Unknown User"}
                             </h2>
                         </div>
@@ -258,31 +333,43 @@ const ChatPage = () => {
 
                     {/* Messages Container */}
                     <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                        {messages.map((msg, index) => (
-                            <div
-                                key={msg.messageid || `temp${index}`}
-                                className={`chat ${
-                                    msg.senderid === userid
-                                        ? "chat-end"
-                                        : "chat-start"
-                                }`}
-                            >
-                                <div className="chat-footer text-xs opacity-50 mt-1">
-                                    {`${new Date(
-                                        msg.timesent
-                                    ).toLocaleTimeString()}`}
+                        {!paneLoading ? (
+                            messages.length > 0 ? (
+                                messages.map((msg, index) => (
+                                    <div
+                                        key={msg.messageid || `temp${index}`}
+                                        className={`chat ${
+                                            msg.senderid === userid
+                                                ? "chat-end"
+                                                : "chat-start"
+                                        }`}
+                                    >
+                                        <div className="chat-footer text-xs opacity-50 mt-1">
+                                            {`${new Date(
+                                                msg.timesent
+                                            ).toLocaleTimeString()}`}
+                                        </div>
+                                        <div
+                                            className={`chat-bubble ${
+                                                msg.senderid === userid
+                                                    ? "chat-bubble-primary"
+                                                    : "chat-bubble-secondary"
+                                            }`}
+                                        >
+                                            {msg.message}
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="flex w-full h-[80%] text-gray-400 text-xl items-center justify-center">
+                                    Select a recipient
                                 </div>
-                                <div
-                                    className={`chat-bubble ${
-                                        msg.senderid === userid
-                                            ? "chat-bubble-primary"
-                                            : "chat-bubble-secondary"
-                                    }`}
-                                >
-                                    {msg.message}
-                                </div>
+                            )
+                        ) : (
+                            <div className="flex w-full h-[80%] text-gray-400 text-xl items-center justify-center">
+                                <span className="loading"></span>
                             </div>
-                        ))}
+                        )}
                         <div ref={messagesEndRef} />
                     </div>
 
@@ -314,165 +401,6 @@ const ChatPage = () => {
                 </div>
             </div>
         </main>
-    );
-};
-
-import { PiChat } from "react-icons/pi";
-
-const NewChatModal = ({ ws, userId }) => {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [searchedUsers, setSearchedUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [message, setMessage] = useState("");
-    const [isSearching, setIsSearching] = useState(false);
-
-    // Debounced search
-    useEffect(() => {
-        const searchUsers = async () => {
-            if (searchQuery.trim()) {
-                setIsSearching(true);
-                try {
-                    const res = await axios.get(
-                        `http://localhost:2012/chat/search?search=${searchQuery}`
-                    );
-                    setSearchedUsers(res.data);
-                } catch (error) {
-                    console.error("Search error:", error);
-                }
-                setIsSearching(false);
-            }
-        };
-        
-        searchUsers();
-    }, [searchQuery]);
-
-    const handleSendMessage = async () => {
-        if (!message.trim() || !selectedUser) return;
-
-        try {
-            // Implement your message sending logic here
-            ws.emit("sendMessage", {
-                senderId: userId,
-                recipientId: selectedUser.userid,
-                message: message,
-            });
-
-            // Close modal after sending
-            document.getElementById("new_chat_modal").close();
-            setMessage("");
-            setSelectedUser(null);
-        } catch (error) {
-            console.error("Send message error:", error);
-        }
-    };
-
-    return (
-        <dialog id="new_chat_modal" className="modal">
-            <div className="modal-box">
-                <span className="flex items-center gap-2 mb-4">
-                    <PiChat />
-                    <h3 className="font-bold text-lg">New Chat</h3>
-                </span>
-
-                {/* Search Input */}
-                <div className="form-control">
-                    <input
-                        type="text"
-                        placeholder="Search users..."
-                        className="input input-bordered w-full"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                </div>
-
-                {/* Search Results */}
-                {isSearching ? (
-                    <div className="text-center p-4">
-                        <span className="loading loading-spinner text-primary"></span>
-                    </div>
-                ) : (
-                    searchedUsers.length > 0 && (
-                        <div className="menu mt-2 shadow bg-base-100 rounded-box w-full max-h-60 overflow-y-auto">
-                            {searchedUsers.map((user) => (
-                                <li key={user.userid}>
-                                    <button
-                                        className="flex items-center gap-2 p-3 hover:bg-base-200"
-                                        onClick={() => setSelectedUser(user)}
-                                    >
-                                        <div className="avatar">
-                                            <div className="w-8 rounded-full">
-                                                <img
-                                                    src={`data:image/png;base64,${user.displaypic}`}
-                                                />
-                                            </div>
-                                        </div>
-                                        <span>{user.fullname}</span>
-                                    </button>
-                                </li>
-                            ))}
-                        </div>
-                    )
-                )}
-
-                {/* Selected User & Message Input */}
-                {selectedUser && (
-                    <div className="mt-4 space-y-4">
-                        <div className="flex items-center gap-2 p-2 bg-base-200 rounded-lg">
-                            <div className="avatar">
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        src={`data:image/png;base64,${selectedUser.displaypic}`}
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-500">
-                                    @{selectedUser.fullname}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="form-control">
-                            <textarea
-                                className="textarea textarea-bordered h-24 w-full"
-                                placeholder="Type your message..."
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
-                            ></textarea>
-                        </div>
-
-                        <div className="flex justify-end gap-2">
-                            <button
-                                className="btn btn-ghost"
-                                onClick={() => {
-                                    setSelectedUser(null);
-                                    setMessage("");
-                                }}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="btn btn-primary"
-                                onClick={handleSendMessage}
-                            >
-                                Send
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {/* Fallback for no results */}
-                {!isSearching && searchedUsers.length === 0 && searchQuery && (
-                    <div className="text-center p-4 text-gray-500">
-                        No users found
-                    </div>
-                )}
-
-                <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </div>
-        </dialog>
     );
 };
 
