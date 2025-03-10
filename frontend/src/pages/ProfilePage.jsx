@@ -239,7 +239,7 @@ const ProfilePage = () => {
                         {avatar}
                     </div>
                 </div>
-                <div className="flex flex-row justify-center bg-white border-x border-gray-200 pb-3">
+                {/* <div className="flex flex-row justify-center bg-white border-x border-gray-200 pb-3">
                     <div className="flex flex-row gap-1 text-primary px-5 hover:opacity-50">
                         <span
                             className="text-sm self-flex-end cursor-pointer select-none"
@@ -252,7 +252,7 @@ const ProfilePage = () => {
                             Edit Profile
                         </span>
                     </div>
-                    {/* <div className="flex flex-row gap-1 text-primary hover:opacity-50 px-5">
+                    <div className="flex flex-row gap-1 text-primary hover:opacity-50 px-5">
                         <FontAwesomeIcon icon={faEdit} />
                         <span
                             className="text-sm opacity-80 self-flex-end cursor-pointer select-none "
@@ -264,8 +264,8 @@ const ProfilePage = () => {
                         >
                             Change password
                         </span>
-                    </div> */}
-                </div>
+                    </div>
+                </div> */}
                 <div className="join-item flex border border-gray-200 p-1 align-middle bg-white">
                     <span className="w-full text-center text-gray-400">
                         Experiences
