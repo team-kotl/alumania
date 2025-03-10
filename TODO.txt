@@ -1,22 +1,8 @@
-Change school and course fields in signup to dropdown ✅
-- Dropdown items should be fetched from backend ✅
-Implement Chat functionality ✅
-- Create chat tables ✅
-- Create websocket backend for chat ✅
-- Create frontend ✅
-- Add new Chat Feature ✅
-- Testing and Polishing
-Implement Emailing Service
-- For notification of pledge
-
-
-URGENT:
-- nodemailer
-- Left sidebar should update on new message received ✅
-
-PARKED:
-Create a change password functionality in profile
-Implement Archival
-- Create archived experience table
-Implement Emailing Service
-- For forgot password
+To do:
+- Archival of posts
+- Change password
+- Forgot password
+- Contact me button
+- Community Chat
+- Limit audience of Experience posts
+- Nodemailer
