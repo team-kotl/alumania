@@ -50,28 +50,36 @@ You must have [node](https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.msi) ins
    npm install
    ```
 
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/team-kotl/alumania.git
+   ```
+2. Install NPM packages for both modules
+   ```sh
+   cd frontend
+   npm install
+   cd ../backend
+   npm install
+   ```
+3. Insert your .env file inside the `/backend` directory (`/backend/.env`)
+
 ### How to run the application
 
-1. All resources are included in this repository. Please create a Database named `alumaniadb` before importing the `.sql` file in the `db_dumps` directory.
+> NOTE: The application's database is hosted in a cloud platform.
 
-2. Validate the `.env` file in `/backend` for your MySQL's user credentials and port
+2. Run the backend
+```bash
+cd backend && npm run dev
+```
 
-3. Change your `max_allowed_packet` parameter to `600M` in your MySQL Configuration (C:\xampp\mysql\bin\my.ini)
-   (Don't forget to restart your XAMPP / WAMPP)
+3. Run the frontend
+```bash
+cd ../frontend && npm run dev
+```
 
-4. Run the backend module
-  ```sh
-  cd backend
-  npm run dev
-  ```
-
-5. Run the frontend module
-  ```sh
-  cd frontend
-  npm run dev
-  ```
-
-6. Open the website: https://localhost:5173/
+4. Open the app: https://localhost:5173/
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
